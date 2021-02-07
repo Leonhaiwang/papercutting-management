@@ -3,11 +3,18 @@
     <div class="inner">
       <div class="inputbutton">
         <div>
-          <el-button type="primary" plain @click="toggleSelection()">取消选择</el-button>
-          <el-button type="danger" plain @click="handleDeleteMax()">批量删除</el-button>
-          <el-button @click="drawer = true" type="success" plain>添加用户</el-button>
-          <el-button @click="addExcel = true" type="warning" plain>批量添加</el-button>
-          <el-button @click="changeweek = true" type="info" plain>修改当前周</el-button>
+          <el-button type="primary" plain @click="toggleSelection()"
+            >取消选择</el-button
+          >
+          <el-button type="danger" plain @click="handleDeleteMax()"
+            >批量删除</el-button
+          >
+          <el-button @click="drawer = true" type="success" plain
+            >添加用户</el-button
+          >
+          <el-button @click="addExcel = true" type="warning" plain
+            >批量添加</el-button
+          >
         </div>
         <div class="search">
           <el-input
@@ -21,8 +28,18 @@
 
         <el-drawer :visible.sync="drawer" :direction="direction">
           <span class="shoudongtext">添加用户</span>
-          <el-input class="inputnum" placeholder="姓名" v-model="name" show-word-limit></el-input>
-          <el-input class="inputnum" placeholder="手机号" v-model="classname" show-word-limit></el-input>
+          <el-input
+            class="inputnum"
+            placeholder="姓名"
+            v-model="name"
+            show-word-limit
+          ></el-input>
+          <el-input
+            class="inputnum"
+            placeholder="手机号"
+            v-model="classname"
+            show-word-limit
+          ></el-input>
           <el-input
             class="inputnum"
             placeholder="请输入用户ID"
@@ -31,7 +48,14 @@
             show-word-limit
           ></el-input>
 
-          <el-button class="plainbutton" type="primary" plain round @click="addOnePerson">提交</el-button>
+          <el-button
+            class="plainbutton"
+            type="primary"
+            plain
+            round
+            @click="addOnePerson"
+            >提交</el-button
+          >
         </el-drawer>
       </div>
     </div>
@@ -50,14 +74,36 @@
         @row-click="rowclick"
       >
         <el-table-column type="selection" width="55"></el-table-column>
-        <el-table-column prop="name" label="姓名" min-width="60"></el-table-column>
-        <el-table-column prop="uid" label="手机号" min-width="60"></el-table-column>
+        <el-table-column
+          prop="name"
+          label="姓名"
+          min-width="60"
+        ></el-table-column>
+        <el-table-column
+          prop="uid"
+          label="手机号"
+          min-width="60"
+        ></el-table-column>
 
-        <el-table-column prop="class" label="昵称" min-width="60"></el-table-column>
-        <el-table-column prop="mac" v-if="isShow" label="地址" min-width="100"></el-table-column>
+        <el-table-column
+          prop="class"
+          label="昵称"
+          min-width="60"
+        ></el-table-column>
+        <el-table-column
+          prop="mac"
+          v-if="isShow"
+          label="地址"
+          min-width="100"
+        ></el-table-column>
         <el-table-column label="操作" min-width="80">
           <template slot-scope="scope">
-            <el-button size="mini" type="danger" @click="handleDelete(scope.row.uid)">删除用户</el-button>
+            <el-button
+              size="mini"
+              type="danger"
+              @click.native.prevent="deleteRow(scope.$index, tableData)"
+              >删除用户</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -68,7 +114,7 @@
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[9, 13,20]"
+        :page-sizes="[9, 13, 20]"
         :page-size="number"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -87,11 +133,11 @@ export default {
         { name: "张三", uid: 17735669856, class: "天天开心" },
         { name: "李四", uid: 16233454434, class: "万事如意" },
         { name: "张三", uid: 17735669856, class: "天天开心" },
-        // { name: "李四", uid: 16233454434, class: "万事如意" },
-        // { name: "张三", uid: 17735669856, class: "天天开心" },
-        // { name: "李四", uid: 16233454434, class: "万事如意" },
+        { name: "李四", uid: 16233454434, class: "万事如意" },
+        { name: "张三", uid: 17735669856, class: "天天开心" },
+        { name: "李四", uid: 16233454434, class: "万事如意" }
         // { name: "张三", uid: 17735669856, class: "天天开心" }
-        ],
+      ],
       searchValueData: [], //保存搜索到的值
       uid: "",
       drawer: false,
@@ -121,6 +167,16 @@ export default {
     this.getWeek();
   },
   methods: {
+    addOnePerson(){
+      let obj = {}
+      obj.name = this.name
+      obj.uid = this.uid
+      obj.classname = this.classname
+      this.tableData.push(obj)
+    },
+    deleteRow(index, rows) {
+      rows.splice(index, 1);
+    },
     searchValue(str) {
       this.searchValueData = [];
       this.newtableData.forEach(el => {
@@ -139,78 +195,9 @@ export default {
       );
       // console.log(this.searchValueData)
     },
-    //输入框值改变触发函数
-    inputChange(str) {
-      //定时器，防抖
-      if (this.timer !== "") {
-        clearTimeout(this.timer);
-        this.timer = "";
-      }
-      this.timer = setTimeout(() => {
-        this.searchValue(str);
-        this.timer = "";
-      }, 500);
-    },
     rowclick(row, column, event) {
       this.$refs.multipleTable.toggleRowSelection(row);
       this.multipleSelection.push(row);
-    },
-    //添加单个用户
-    async addOnePerson() {
-      const { uid, name, classname } = this;
-      if (uid && name && classname) {
-        const { data } = await this.$http.post("/addOneUser", {
-          uid: this.uid,
-          name: this.name,
-          classname: this.classname,
-          type: this.type
-        });
-        if (data.status === 0) {
-          this.$message({
-            message: "上传用户信息成功",
-            type: "success"
-          });
-
-          setTimeout(() => {
-            this.getAllUser();
-          }, 500);
-          this.uid = "";
-          this.name = "";
-          this.classname = "";
-        }
-      } else {
-        this.$message({
-          message: "请正确输入内容",
-          type: "error"
-        });
-      }
-    },
-    //删除用户
-    async deleteUser(index) {
-      if (this.type === "1") {
-        //人脸
-        const { data } = await this.$http.get(
-          `/deleteUser?type=${this.type}&uids=${index}`
-        );
-        if (data.status === 0) {
-          this.$message({
-            message: "删除成功",
-            type: "success"
-          });
-          this.getAllUser();
-        }
-      } else if (this.type === "2") {
-        const { data } = await this.$http.get(
-          `/deleteUser?type=${this.type}&uids=${index}`
-        );
-        if (data.status === 0) {
-          this.$message({
-            message: "删除成功",
-            type: "success"
-          });
-          this.getAllUser();
-        }
-      }
     },
 
     handleSizeChange(val) {
@@ -267,11 +254,15 @@ export default {
     handleSelectionChange(val) {
       this.multipleSelection = val;
     },
-    handleEdit(index, row) {},
     //删除
     handleDelete(index) {
       index = `'${index}'`;
-      this.deleteUser(index);
+      // console.log(index)
+      this.tableData.forEach(i => {
+        if (parseInt(index) === i.uid) {
+          console.log(this.tableData.splice(0, 1));
+        }
+      });
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);

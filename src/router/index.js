@@ -7,13 +7,18 @@ import watchtime from '../views/watchtime.vue';
 import login from '../views/login.vue'
 import usermanage from '../views/usermanage.vue'
 import Home from '../views/home.vue'
+import Forum from '../views/forum.vue'
+import papercutting from '../views/papercutting.vue'
+import findmis from '../views/findmis.vue'
+import question from '../views/question.vue'
+import newQuestionList from '../views/newQuestionList.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'index',
-    redirect:'/home',
     component: index,
     children:[
       {
@@ -32,10 +37,30 @@ const routes = [
         component:usermanage
       },
       {
-        path: '/home',
-        name: 'home',
-        component:Home
+        path: '/forum',
+        name: 'forum',
+        component:Forum
       },
+      {
+        path: '/papercutting',
+        name: 'papercutting',
+        component:papercutting
+      },
+      {
+        path: '/findmis',
+        name: 'findmis',
+        component:findmis
+      },
+      {
+        path: '/question',
+        name: 'question',
+        component:question
+      },
+      {
+        path: '/newQuestionList',
+        name: 'newQuestionList',
+        component:newQuestionList
+      }
     ]
   },
   {

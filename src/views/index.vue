@@ -13,30 +13,29 @@
             text-color="#fff"
             active-text-color="#edd42a"
           >
-            <el-menu-item index="/usermanage" @click="changeN">
+            <el-menu-item index="/usermanage" @click="changeUserManage">
               <i class="el-icon-menu"></i>
               <span slot="title">用户管理</span>
             </el-menu-item>
-            <el-menu-item index="/watchtime" @click="changeA('/watchtime')">
+            <el-menu-item index="/papercutting" @click="changePapercutting">
               <i class="el-icon-date"></i>
               <span slot="title">剪纸管理</span>
             </el-menu-item>
-            <el-menu-item index="/usermanage" @click="changeN">
+            <el-menu-item index="/forum" @click="changeForum">
               <i class="el-icon-setting"></i>
               <span slot="title">论坛管理</span>
             </el-menu-item>
-            <el-menu-item index="/usermanage" @click="changeN">
+            <el-menu-item index="/findmis" @click="changeFindmis">
               <i class="el-icon-setting"></i>
               <span slot="title">纠错查漏</span>
             </el-menu-item>
-            <el-menu-item index="/usermanage" @click="changeN">
+            <el-menu-item index="/question" @click="changeQuestion">
               <i class="el-icon-setting"></i>
               <span slot="title">问卷调查</span>
             </el-menu-item>
-            
           </el-menu>
         </el-aside>
-       
+
         <el-main>
           <router-view />
         </el-main>
@@ -50,76 +49,34 @@
 <script>
 export default {
   data() {
-    return {
-      nowSystem: localStorage.getItem("a") !== "人脸" ? "扫码签到" : "人脸签到",
-      isShow: localStorage.getItem("a") !== "人脸",
-      dialogVisible: false,
-      path: "/HelloWorld",
-      input: ""
-    };
+    return {};
   },
   methods: {
-    sm() {
-      this.nowSystem = "扫码签到";
-      this.isShow = true;
-      localStorage.setItem("a", "扫码");
-      localStorage.setItem("type", "2"); //type值
-      this.$router.push({ path: "/HelloWorld" });
-      window.location.reload();
+    changeQuestion() {
+      this.$router.push({ path: "/question" });
     },
-    face() {
-      this.nowSystem = "人脸签到";
-      this.isShow = false;
-      localStorage.setItem("a", "人脸");
-      localStorage.setItem("type", "1");
-      this.$router.push({ path: "/watchtime" });
-      window.location.reload();
+    changeForum() {
+      this.$router.push({ path: "/forum" });
     },
-    setA() {
-      if (!localStorage.getItem("a")) {
-        localStorage.setItem("a", "扫码");
-        localStorage.setItem("type", "2");
-      }
+    changeUserManage() {
+      this.$router.push({ path: "/usermanage" });
     },
-    submitpassword() {
-      if (this.input === "20201016") {
-        this.dialogVisible = false;
-        sessionStorage.setItem("admin", "admin");
-        this.$router.push({ path: "/usermanage" });
-      } else {
-        this.$message({
-          message: "密码错误，请重新输入",
-          type: "error"
-        });
-        this.input = "";
-      }
+    changePapercutting() {
+      this.$router.push({ path: "/papercutting" });
     },
-
+    changeFindmis() {
+      this.$router.push({ path: "/findmis" });
+    },
     changeN() {
-      if (!sessionStorage.getItem("admin")) {
-        this.dialogVisible = true;
-      } else {
-        this.dialogVisible = false;
-        this.$router.push({ path: "/usermanage" });
-        this.path = "/usermanage";
-      }
+      this.$router.push({ path: "/usermanage" });
+      this.path = "/usermanage";
     },
 
-    changeA(indexX) {
-      if (this.$route.path !== indexX) this.$router.push({ path: indexX });
-    },
-    deleteT() {
-      this.dialogVisible = false;
-      if (this.$route.path === "/home") {
-        this.path = "";
-      } else {
-        this.path = this.$route.path;
-      }
-    }
+    
   },
   created() {
-    this.setA();
-    this.path = this.$route.path;
+  
+
   }
 };
 </script>

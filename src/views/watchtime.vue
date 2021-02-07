@@ -8,17 +8,33 @@
           </download-excel>
         </div>
         <div>
-          <el-button class="btn2" type="danger" plain @click="deleteweek = true">删除信息</el-button>
+          <el-button class="btn2" type="danger" plain @click="deleteweek = true"
+            >删除信息</el-button
+          >
         </div>
         <div>
-          <el-button class="btn2" type="warning" plain @click="open">删除全部信息</el-button>
+          <el-button class="btn2" type="warning" plain @click="open"
+            >删除全部信息</el-button
+          >
         </div>
       </div>
       <el-drawer :visible.sync="deleteweek" :direction="direction">
         <span class="shoudongtext">删除信息</span>
 
-        <el-input class="inputnum" placeholder="请输入你要删除的周" v-model="deleteWeekNum" show-word-limit></el-input>
-        <el-button class="plainbutton" type="danger" plain round @click="deleteUserTimer">确认删除</el-button>
+        <el-input
+          class="inputnum"
+          placeholder="请输入你要删除的周"
+          v-model="deleteWeekNum"
+          show-word-limit
+        ></el-input>
+        <el-button
+          class="plainbutton"
+          type="danger"
+          plain
+          round
+          @click="deleteUserTimer"
+          >确认删除</el-button
+        >
       </el-drawer>
       <div class="search">
         <el-input
@@ -35,13 +51,25 @@
       stripe
       max-height="500px"
       style="width: 100%"
-      :default-sort="{prop: 'week', order: 'descending'}"
-      :row-style="{height:'20px'}"
+      :default-sort="{ prop: 'week', order: 'descending' }"
+      :row-style="{ height: '20px' }"
       sort-by="week"
     >
-      <el-table-column prop="username" label="姓名" v-show="isShow"></el-table-column>
-      <el-table-column prop="uid" v-if="a!=='人脸'" label="学号" width="120"></el-table-column>
-      <el-table-column prop="class" :label="a==='人脸'?'所在教室':'班级'"></el-table-column>
+      <el-table-column
+        prop="username"
+        label="姓名"
+        v-show="isShow"
+      ></el-table-column>
+      <el-table-column
+        prop="uid"
+        v-if="a !== '人脸'"
+        label="学号"
+        width="120"
+      ></el-table-column>
+      <el-table-column
+        prop="class"
+        :label="a === '人脸' ? '所在教室' : '班级'"
+      ></el-table-column>
       <el-table-column prop="mon" label="周一"></el-table-column>
       <el-table-column prop="tues" label="周二"></el-table-column>
       <el-table-column prop="wed" label="周三"></el-table-column>
@@ -49,14 +77,19 @@
       <el-table-column prop="fri" label="周五"></el-table-column>
       <el-table-column prop="sat" label="周六"></el-table-column>
       <el-table-column prop="sun" label="周日"></el-table-column>
-      <el-table-column prop="week" label="当前周" sortable width="120"></el-table-column>
+      <el-table-column
+        prop="week"
+        label="当前周"
+        sortable
+        width="120"
+      ></el-table-column>
     </el-table>
     <div class="block">
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         :current-page="currentPage"
-        :page-sizes="[ 9, 13,20]"
+        :page-sizes="[9, 13, 20]"
         :page-size="number"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
@@ -87,26 +120,27 @@ export default {
   },
   methods: {
     open() {
-        this.$confirm('此操作将永久删除全部信息， 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.deleteAllWeeks()
+      this.$confirm("此操作将永久删除全部信息， 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          this.deleteAllWeeks();
           this.getAllFacTimer();
-
-        }).catch(() => {
+        })
+        .catch(() => {
           this.$message({
-            type: 'info',
-            message: '已取消删除'
-          });          
+            type: "info",
+            message: "已取消删除"
+          });
         });
-      },
-      async deleteAllWeeks(){
-        const { data } = await this.$http.get("/deleteAllWeeks", {
-          params: { type: this.type }
-        });
-        if (data.status === 0) {
+    },
+    async deleteAllWeeks() {
+      const { data } = await this.$http.get("/deleteAllWeeks", {
+        params: { type: this.type }
+      });
+      if (data.status === 0) {
         this.$message({
           type: "success",
           message: "删除成功!"
@@ -117,28 +151,7 @@ export default {
           message: "删除失败"
         });
       }
-
-      },
-      async deleteUserTimer() {
-      const { data } = await this.$http.get("/deleteWeeks", {
-        params: { week: this.deleteWeekNum, type: this.type }
-      });
-      console.log(data.status)
-      if (data.status === 0) {
-        this.$message({
-          type: "success",
-          message: "删除成功!"
-        });
-         this.deleteWeekNum = "";
-        this.getAllFacTimer();
-      } else {
-        this.$message({
-          type: "error",
-          message: "删除失败，请检查你输入的数据!"
-        });
-      }
     },
-    //导出表格后删除
     // deleteMeg(){
     //     this.$confirm('是否删除已导出的信息?', '提示', {
     //       confirmButtonText: '确定',
