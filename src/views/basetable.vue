@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <div class="container">
       <div class="handle-box">
         <el-button
@@ -10,7 +9,7 @@
           @click="delAllSelection"
           >批量删除</el-button
         >
-     
+
         <el-input
           v-model="query.name"
           placeholder="用户名"
@@ -40,7 +39,7 @@
           align="center"
         ></el-table-column>
         <el-table-column prop="name" label="用户名"></el-table-column>
-        
+
         <el-table-column label="头像(查看大图)" align="center">
           <template slot-scope="scope">
             <el-image
@@ -113,13 +112,48 @@ export default {
         pageSize: 10
       },
       tableData: [
-        {uid:321,name:"张三",img:"",address:"山西省晋中市",date:"2021年2月1日"},
-        {uid:321,name:"张三",img:"",address:"山西省晋中市",date:"2021年2月1日"},
-        {uid:321,name:"张三",img:"",address:"山西省晋中市",date:"2021年2月1日"},
-        {uid:321,name:"张三",img:"",address:"山西省晋中市",date:"2021年2月1日"},
-        {uid:321,name:"张三",img:"",address:"山西省晋中市",date:"2021年2月1日"},
-        {uid:321,name:"李",img:"",address:"山西省晋中市",date:"2021年2月1日"}
-        
+        {
+          uid: 321,
+          name: "张三",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        },
+        {
+          uid: 321,
+          name: "张三",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        },
+        {
+          uid: 321,
+          name: "张三",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        },
+        {
+          uid: 321,
+          name: "张三",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        },
+        {
+          uid: 321,
+          name: "张三",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        },
+        {
+          uid: 321,
+          name: "李",
+          img: "",
+          address: "山西省晋中市",
+          date: "2021年2月1日"
+        }
       ],
       multipleSelection: [],
       delList: [],

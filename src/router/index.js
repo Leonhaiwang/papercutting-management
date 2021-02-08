@@ -13,6 +13,8 @@ import findmis from '../views/findmis.vue'
 import question from '../views/question.vue'
 import newQuestionList from '../views/newQuestionList.vue'
 import basetable from '../views/basetable.vue'
+import newpapercutting from '../views/newpapercutting.vue'
+import markdown from '../views/markdown.vue'
 
 Vue.use(VueRouter)
 
@@ -67,6 +69,18 @@ const routes = [
         path: '/basetable',
         name: 'basetable',
         component:basetable
+      }
+      ,
+      {
+        path: '/newpapercutting',
+        name: 'newpapercutting',
+        component:newpapercutting
+      },
+      
+      {
+        path: '/markdown',
+        name: 'markdown',
+        component:markdown
       }
     ]
   },
