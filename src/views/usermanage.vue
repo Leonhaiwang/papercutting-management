@@ -171,7 +171,7 @@ export default {
       let obj = {}
       obj.name = this.name
       obj.uid = this.uid
-      obj.classname = this.classname
+      obj.class = this.classname
       this.tableData.push(obj)
     },
     deleteRow(index, rows) {

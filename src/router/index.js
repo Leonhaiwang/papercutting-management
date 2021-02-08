@@ -12,6 +12,7 @@ import papercutting from '../views/papercutting.vue'
 import findmis from '../views/findmis.vue'
 import question from '../views/question.vue'
 import newQuestionList from '../views/newQuestionList.vue'
+import basetable from '../views/basetable.vue'
 
 Vue.use(VueRouter)
 
@@ -60,6 +61,12 @@ const routes = [
         path: '/newQuestionList',
         name: 'newQuestionList',
         component:newQuestionList
+      }
+      ,
+      {
+        path: '/basetable',
+        name: 'basetable',
+        component:basetable
       }
     ]
   },

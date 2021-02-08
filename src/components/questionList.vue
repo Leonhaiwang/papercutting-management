@@ -1,62 +1,62 @@
 <template>
   <div class="questionList">
     <p class="textClass">
-      {{title}}
+      {{ title }}
     </p>
     <p class="middleP">
-     {{status}}
+      {{ status }}
     </p>
-   
+
     <p class="middleBottom">
-     {{date}}
+      {{ date }}
     </p>
-     <el-button  class = "button" type="warning" round plain size="mini">编辑</el-button>
+    <el-button class="button" type="danger" round plain size="mini"
+      >{{type}}</el-button
+    >
   </div>
 </template>
 <script>
 export default {
- props:{
-   title:String,
-   date:String,
-   status:String
- },
- data:{
-   return:{
-     
-   }
- }
-}
+  props: {
+    title: String,
+    date: String,
+    status: String,
+    type: String
+  },
+  data: {
+    return: {}
+  }
+};
 </script>
 <style scoped>
-.button{
+.button {
   position: relative;
   top: 30px;
 }
-.questionList{
+.questionList {
   height: 220px;
-  width:150px;
+  width: 150px;
   background-color: #f7ffff;
   border: #fff 3px solid;
-  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);  
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   margin: 10px;
   text-align: center;
-  
 }
-.middleP{
+.middleP {
   position: relative;
   font-size: 14px;
-  top:31px;
+  top: 31px;
 }
-.middleBottom{
+.middleBottom {
   position: relative;
   font-size: 12px;
   top: 80px;
   color: grey;
 }
-.textClass{
+.textClass {
   margin: 30px;
   font-weight: bold;
   font-size: 18px;
-  }
+}
 </style>

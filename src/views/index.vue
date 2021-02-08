@@ -13,7 +13,7 @@
             text-color="#fff"
             active-text-color="#edd42a"
           >
-            <el-menu-item index="/usermanage" @click="changeUserManage">
+            <el-menu-item index="/basetable" @click="changeUserManage">
               <i class="el-icon-menu"></i>
               <span slot="title">用户管理</span>
             </el-menu-item>
@@ -59,7 +59,7 @@ export default {
       this.$router.push({ path: "/forum" });
     },
     changeUserManage() {
-      this.$router.push({ path: "/usermanage" });
+      this.$router.push({ path: "/basetable" });
     },
     changePapercutting() {
       this.$router.push({ path: "/papercutting" });

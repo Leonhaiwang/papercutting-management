@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-     <el-button  class = "button" type="danger"  plain @click="changeNew">新增问卷</el-button>
+     <el-button  class = "button" type="success"  plain @click="changeNew">新增问卷</el-button>
   </div>
 </template>
 <script>
