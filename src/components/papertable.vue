@@ -1,7 +1,5 @@
 <template>
-  <div><el-button class="button" type="danger" plain @click="changeNew"
-      >新增文章</el-button
-    >
+  <div>
     <div class="container">
       <el-table
         :data="tableData"
@@ -11,12 +9,19 @@
         header-cell-class-name="table-header"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column
+        <el-table-column  
           type="selection"
           width="55"
           align="center"
         ></el-table-column>
-        
+        <el-table-column label="剪纸主图" align="center">
+          <el-image
+            style="width: 100px; height: 100px"
+            :src="url"
+            :preview-src-list="srcList"
+          >
+          </el-image>
+        </el-table-column>
         <el-table-column prop="papername" label="作品名称"></el-table-column>
         <el-table-column prop="name" label="作者"></el-table-column>
 
@@ -82,6 +87,14 @@ export default {
         pageIndex: 1,
         pageSize: 10
       },
+      url:
+      "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2660215430,3091582050&fm=26&gp=0.jpg",
+       
+      srcList: [
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2660215430,3091582050&fm=26&gp=0.jpg",
+       ,"https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2660215430,3091582050&fm=26&gp=0.jpg",
+       
+      ],
       tableData: [
         {papername:"双龙戏凤",name:"李思思",address:"山西省吕梁中阳县",date:"2021年2月1日"},
         {papername:"双龙戏凤",name:"李思思",address:"山西省吕梁中阳县",date:"2021年2月1日"},
@@ -101,9 +114,6 @@ export default {
     this.getData();
   },
   methods: {
-    changeNew() {
-      this.$router.push({ path: "/markdown" });
-    },
     // 获取 easy-mock 的模拟数据
     getData() {
       fetchData(this.query).then(res => {
@@ -163,9 +173,6 @@ export default {
 </script>
 
 <style scoped>
-.button{
-  margin-bottom: 20px;
-}
 .handle-box {
   margin-bottom: 20px;
 }
