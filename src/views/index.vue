@@ -25,23 +25,22 @@
               <i class="el-icon-setting"></i>
               <span slot="title">论坛管理</span>
             </el-menu-item>
-            <el-menu-item index="/findmis" @click="changeFindmis">
+            <!-- <el-menu-item index="/findmis" @click="changeFindmis">
               <i class="el-icon-setting"></i>
               <span slot="title">纠错查漏</span>
-            </el-menu-item>
+            </el-menu-item> -->
             <el-menu-item index="/question" @click="changeQuestion">
               <i class="el-icon-setting"></i>
               <span slot="title">问卷调查</span>
             </el-menu-item>
           </el-menu>
         </el-aside>
-
         <el-main>
           <router-view />
         </el-main>
       </el-container>
       <el-footer>
-        <span class="bottomS">中阳剪纸管理系统作者：name</span>
+        <span class="bottomS">中阳剪纸管理系统作者：席晨阳</span>
       </el-footer>
     </el-container>
   </div>
